@@ -1,0 +1,19 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.helvetica{
+    font-family: "Helvetica Neue";
+}
+
+.richmond_display{
+    font-family: "Richmond Display";
+}
+
+.border{
+    border :1px solid white
+}
+
+.border_2{
+    border:0.5px solid rgba(217, 217, 217, 0.75)
+}

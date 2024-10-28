@@ -1,0 +1,317 @@
+.highly_recommended{
+    color: #FFF;
+    color: color(display-p3 1 1 1);
+    text-align: center;
+    font-family: "Richmond Display";
+    font-style: normal;
+    font-weight: 300;
+    line-height: 73%;
+}
+      
+.specials{
+    color: #FFF;
+    color: color(display-p3 1 1 1);
+    text-align: center;
+    font-family: "Richmond Display";
+    font-style: normal;
+    font-weight: 300;
+    line-height: 74%; /* 44.4px */
+}
+
+.specials_card{
+    background: radial-gradient(90.55% 78.14% at 49.25% 52.53%, #22252C 0%, #000 100%);
+background: radial-gradient(90.55% 78.14% at 49.25% 52.53%, color(display-p3 0.1352 0.1452 0.1708) 0%, color(display-p3 0 0 0) 100%);
+}
+
+.special_name{
+    color: #FFF;
+    color: color(display-p3 1 1 1);
+    text-align: center;
+    font-family: "Richmond Display";
+    font-style: normal;
+    font-weight: 300;
+    line-height: 74%; /* 44.4px */
+}
+
+.special_title{
+    color: #FFF;
+    color: color(display-p3 1 1 1);
+    text-align: center;
+    font-family: "Helvetica Neue";
+    line-height: 74%; /* 20.235px */
+}
+
+.special_text{
+    color: #FFF;
+    color: color(display-p3 1 1 1);
+    text-align: center;
+    font-family: "Helvetica Neue";
+    line-height: 100%; /* 20px */
+}
+
+.learn_more_button{
+    background-color: transparent;
+    color: #FFF;
+    border: 0.766px solid #D9D9D9;
+    border: 0.766px solid color(display-p3 0.851 0.851 0.851);
+}
+
+.horizontal {
+    height: 2px;
+    background-color: #ffffff;
+}
+
+.horizontal.transparent {
+    background: linear-gradient(90deg, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0) 100%);
+}
+
+.product_list{
+    color: #FFF;
+    color: color(display-p3 1 1 1);
+    text-align: center;
+    font-family: "Richmond Display";
+    font-style: normal;
+    font-weight: 300;
+    line-height: 74%; /* 44.4px */
+}
+
+.chosen{
+    color: black;
+    background: #FFF;
+    background: color(display-p3 1 1 1);
+}
+
+
+.perfume-position {
+    top: 26%;
+    left: 27%;
+}
+
+.perfume {
+width: 10rem; /* Equivalent to w-40 in Tailwind */
+}
+  
+  @media (min-width: 1440px) {
+    .perfume-position {
+      top: 32%;
+      left: 27%;
+    }
+    .perfume{
+        width: 11rem;
+    }
+  }
+  @media (max-width: 1440px) {
+    .perfume-position {
+      top: 32%;
+      left: 27%;
+    }
+    .perfume{
+        width: 11rem;
+    }
+  }
+  
+  @media (max-width: 1280px) {
+    .perfume-position {
+      top: 30%;
+      left: 27%;
+
+    }
+    .perfume{
+        width: 10rem;
+    }
+  }
+  
+  @media (max-width: 1024px) {
+    .perfume-position {
+      top: 27%;
+      left: 27%;
+    }
+
+    .perfume{
+        width: 9rem;
+    }
+  }
+  
+  @media (max-width: 900px) {
+    .perfume-position {
+      top: 23%;
+      left: 25%;
+    }
+
+    .perfume{
+        width: 9rem;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .perfume-position {
+      top: 25%;
+      left: 25%;
+    }
+
+    .perfume{
+        width: 7rem;
+    }
+  }
+  
+  @media (max-width: 640px) {
+    .perfume-position {
+      top: 24%;
+      left: 26%;
+    }
+    
+    .perfume{
+        width: 6rem;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .perfume-position {
+      top: 17%;
+      left: 23%;
+    }
+
+    .perfume{
+        width: 5rem;
+    }
+  }
+  
+  @media (max-width: 400px) {
+    .perfume-position {
+      top: 20%;
+      left: 24%;
+    }
+
+    .perfume{
+        width: 4rem;
+    }
+  }
+  
+  @media (max-width: 320px) {
+    .perfume-position {
+      top: 25%;
+      left: 26%;
+    }
+
+    .perfume{
+        width: 3rem;
+    }
+  }
+  
+
+.perfume-position_2 {
+    top:15%;
+    left: 57%;
+}
+
+.perfume_2 {
+    width: 10rem; /* Equivalent to w-40 in Tailwind */
+}
+
+
+@media (min-width: 1440px) {
+    .perfume-position_2 {
+      top: 15%;
+      left: 57%;
+    }
+    .perfume_2{
+        width: 14rem;
+    }
+  }
+  @media (max-width: 1440px) {
+    .perfume-position_2 {
+      top: 14%;
+      left: 57%;
+    }
+    .perfume_2{
+        width: 14rem;
+    }
+  }
+  
+  @media (max-width: 1280px) {
+    .perfume-position_2 {
+      top: 14%;
+      left: 57%;
+
+    }
+    .perfume_2{
+        width: 10rem;
+    }
+  }
+  
+  @media (max-width: 1024px) {
+    .perfume-position_2 {
+      top: 11%;
+      left: 57%;
+    }
+
+    .perfume_2{
+        width: 11rem;
+    }
+  }
+  
+  @media (max-width: 900px) {
+    .perfume-position_2 {
+      top: 6%;
+      left: 55%;
+    }
+
+    .perfume_2{
+        width: 10rem;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .perfume-position_2 {
+      top: 12%;
+      left: 55%;
+    }
+
+    .perfume_2{
+        width: 7rem;
+    }
+  }
+  
+  @media (max-width: 640px) {
+    .perfume-position_2 {
+      top: 16%;
+      left: 56%;
+    }
+    
+    .perfume_2{
+        width: 6rem;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .perfume-position_2 {
+      top: 12%;
+      left: 53%;
+    }
+
+    .perfume_2{
+        width: 5rem;
+    }
+  }
+  
+  @media (max-width: 400px) {
+    .perfume-position_2 {
+      top: 6%;
+      left: 54%;
+    }
+
+    .perfume_2{
+        width: 4rem;
+    }
+  }
+  
+  @media (max-width: 320px) {
+    .perfume-position_2 {
+      top: 3.5%;
+      left: 53%;
+    }
+
+    .perfume_2{
+        width: 4rem;
+    }
+  }

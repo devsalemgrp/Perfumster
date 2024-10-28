@@ -1,0 +1,96 @@
+
+
+
+.body{
+    background-image: radial-gradient(89.63% 59.76% at 48.67% 46%, color(display-p3 0.1922 0.1922 0.1922) 0%, color(display-p3 0 0 0) 100%);
+    background-size: cover; /* Ensures the gradient covers the entire element */
+    background-position: center; /* Centers the background */
+    background-repeat: no-repeat; /* Prevents the gradient from repeating */
+    width: 100%; /* Full width */
+}
+
+
+
+.package_chooser{
+    border-radius: 13.965px;
+    border: 0.635px solid #FFF;
+    border: 0.635px solid color(display-p3 1 1 1);
+    background: rgba(255, 255, 255, 0.08);
+    background: color(display-p3 1 1 1 / 0.08);
+    backdrop-filter: blur(12.695884704589844px);
+    
+}
+
+.clicked{
+    border-radius: 13.965px;
+    opacity: 0.7;
+    background: #FFF;
+    color: black;
+    background: color(display-p3 1 1 1);
+    ;
+}
+
+.card{
+    border-radius: 5px;
+    border: 1px solid #FFF;
+    border: 1px solid color(display-p3 1 1 1);
+    background: rgba(255, 255, 255, 0.08);
+    background: color(display-p3 1 1 1 / 0.08);
+    backdrop-filter: blur(20px);
+
+}
+
+.scent{
+    color: #FFF;
+    color: color(display-p3 1 1 1);
+    text-align: center;
+    font-family: "Richmond Display";
+    font-style: normal;
+    font-weight: 300;
+    line-height: 79%; /* 49.148px */
+}
+
+.price{
+    color: #FFF;
+    color: color(display-p3 1 1 1);
+    text-align: center;
+    font-family: "Helvetica Neue";
+    font-style: normal;
+    font-weight: 700;
+    line-height: 79%; /* 116.463px */
+}
+
+.subscribe{
+    background: #FFF;
+    background: color(display-p3 1 1 1);
+    color:black;
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.5), 0 0 30px rgba(255, 255, 255, 0.4), 0 0 60px rgba(255, 255, 255, 0.3);
+}
+
+.glow{
+    text-shadow: 0 0 15px rgba(255, 255, 255, 0.5), 0 0 30px rgba(255, 255, 255, 0.4), 0 0 60px rgba(255, 255, 255, 0.3);
+
+}
+
+.start_shopping_button{
+    color: white;
+    background-color: transparent;
+    border: 1px solid #D9D9D9;
+    border: 1px solid color(display-p3 0.851 0.851 0.851);
+}
+
+.learn_now{
+    color: #000;
+    font-family: "Helvetica Neue";
+    font-style: normal;
+    font-weight: 200;
+    line-height: 100%; /* 20.263px */
+    letter-spacing: 0.507px;
+}
+
+.richmond{
+    font-family: "Richmond Display";
+    font-style: normal;
+    font-weight: 300;
+    line-height: 100%; /* 80px */
+}

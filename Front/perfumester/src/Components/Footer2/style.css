@@ -1,0 +1,80 @@
+.footer_container{
+    background: #3B2526;
+}
+
+.footer_content{
+    color: #FFF;
+    color: color(display-p3 1 1 1);
+    text-align: center;
+    font-family: "Richmond Display";
+    font-style: normal;
+    font-weight: 400;
+    line-height: 85%; /* 69.686px */
+}
+
+.footer_content_links{
+    color: #FFF;
+    opacity: 0.4;
+    font-family: "Helvetica Neue";
+    font-style: normal;
+    font-weight: 200;
+    line-height: 73%; 
+    text-decoration-line: underline;
+}
+
+.vertical_line {
+    width: 1px;
+    height: auto;
+    background-color: #ffffff; 
+    margin: 0 20px; 
+}
+
+.horizontal_line{
+    width: 41.369px;
+    height: 0.5px;
+}
+
+.vertical_line.transparent{
+    background: linear-gradient(180deg, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0.2) 100%);
+
+}
+
+.footer_title_links{
+    color: #FFF;
+    color: color(display-p3 1 1 1);
+    text-align: center;
+    font-family: "Richmond Display";
+    font-style: normal;
+    font-weight: 700;
+    line-height: 73%; /* 18.98px */
+}
+
+.footer_items_links{
+    color: #FFF;
+    color: color(display-p3 1 1 1);
+    font-family: "Helvetica Neue";
+    font-size: 1px;
+    font-style: normal;
+    line-height: 73%; /* 14.6px */
+}
+
+.footer_title{
+    color: #FFF;
+    color: color(display-p3 1 1 1);
+    text-align: center;
+    -webkit-text-stroke-color: #000;
+    -webkit-text-stroke-width: 0.15280142426490784;
+    -webkit-text-stroke-color: color(display-p3 0 0 0);
+    font-family: "Richmond Display";
+    font-style: normal;
+    font-weight: 300;
+    line-height: 73%; 
+}
+
+.footer_subtitle{
+    color: #FFF;
+    text-align: center;
+    font-family: Montserrat;
+    line-height: 73%; 
+}
+
