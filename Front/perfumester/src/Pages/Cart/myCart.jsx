@@ -5,10 +5,13 @@ import Footer1 from "../../Components/Footer1/footer1";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getProducts } from "../../Redux/Products/ProductsActions";
-//The cart will be implemented using Redux , where the quantity and the perfumes are going to be saved ]
-// in an array
-//check if how can we save the image of the perfume in the cart
-//The array will contain , perfume , quantity and the total cost
+import {
+  decreaseQuantity,
+  getCartData,
+  increaseQuantity,
+  removeFromCart,
+  updateCart,
+} from "../../Redux/Cart/CartActions";
 
 const MyCart = () => {
   const [perfumes, setPerfumes] = useState([]);
@@ -18,6 +21,8 @@ const MyCart = () => {
     (store) => store.productsReducer
   );
 
+  const { cart } = useSelector((store) => store.cartReducer);
+
   useEffect(() => {
     dispatch(getProducts());
   }, [dispatch]);
@@ -26,16 +31,25 @@ const MyCart = () => {
     setPerfumes(products);
   }, [products]);
 
-  const handleIncreaseQuantity = (index) => {
-    // Implentation
+  useEffect(() => {
+    console.log("CART", cart);
+  }, [cart]);
+
+  const handleIncreaseQuantity = (e, element) => {
+    e.preventDefault();
+    console.log("element", element);
+    dispatch(increaseQuantity(element));
   };
 
-  const handleDecreaseQuantity = (index) => {
-    // Implentation
+  const handleDecreaseQuantity = (e, element) => {
+    e.preventDefault();
+    console.log("element", element);
+    dispatch(decreaseQuantity(element));
   };
 
-  const handleDelete = (index) => {
-    //Implementation
+  const handleDelete = (e, element) => {
+    e.preventDefault();
+    dispatch(removeFromCart(element));
   };
 
   return (
@@ -51,28 +65,38 @@ const MyCart = () => {
           </div>
 
           <div className="flex flex-col gap-4 pt-5">
-            {perfumes.slice(0, 5).map((element, index) => (
+            {cart.map((element, index) => (
               <>
                 <div className="flex md:flex-row flex-col gap-y-5  ">
                   <div className="flex-1 flex flex-row gap-2 items-center">
                     <div className="border">
-                      <img src={element.image} alt="" width={60} />
+                      <img
+                        src={
+                          process.env.REACT_APP_BASE_URL + element.perfume.image
+                        }
+                        alt=""
+                        width={60}
+                      />
                     </div>
-                    <span>{element.name}</span>
+                    <span>{element.perfume.name}</span>
                   </div>
 
                   <div className="flex-1 flex md:justify-center items-center flex-row gap-4">
                     QTY:
                     <div className="flex flex-row gap-2 p-1 px-2 w-28 border justify-between">
                       <span
-                        onClick={handleDecreaseQuantity()}
+                        onClick={(e) => {
+                          handleDecreaseQuantity(e, element);
+                        }}
                         className="cursor-pointer"
                       >
                         -
                       </span>
                       <span>{element.quantity}</span>
                       <span
-                        onClick={handleIncreaseQuantity()}
+                        onClick={(e) => {
+                          handleIncreaseQuantity(e, element);
+                        }}
                         className="cursor-pointer"
                       >
                         +
@@ -81,10 +105,12 @@ const MyCart = () => {
                   </div>
 
                   <div className="flex-1 flex flex-row items-center md:justify-end gap-3">
-                    <span>${element.price}</span>
+                    <span>${element.perfume.price * element.quantity}</span>
                     <div
                       className="border p-1 cursor-pointer"
-                      onClick={handleDelete(index)}
+                      onClick={(e) => {
+                        handleDelete(e, element);
+                      }}
                     >
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -113,7 +139,7 @@ const MyCart = () => {
           <div className="flex md:flex-row flex-col gap-2 items-end">
             <span>Tax included. Shipping calculated at checkout </span>
             <span className="text-3xl">
-              ${perfumes.reduce((sum, item) => sum + item.price, 0)}
+              {/* ${perfumes.reduce((sum, item) => sum + item.price, 0)} */}
             </span>
           </div>
 

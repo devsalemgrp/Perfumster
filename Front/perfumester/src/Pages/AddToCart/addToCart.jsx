@@ -3,7 +3,7 @@ import PerfumeCard from "../../Components/perfumeCard";
 import { useDispatch, useSelector } from "react-redux";
 import { getProducts } from "../../Redux/Products/ProductsActions";
 import { useLocation, useNavigate } from "react-router-dom";
-import ScrollToTop from "../../Components/scrollToTop";
+import { addToCart } from "../../Redux/Cart/CartActions";
 
 const localHost = "http://localhost:3001/";
 const shuffleArray = (array) => {
@@ -11,7 +11,7 @@ const shuffleArray = (array) => {
 };
 
 const AddToCart = () => {
-  const [quantity, setQuantity] = useState(0);
+  const [quantity, setQuantity] = useState(1);
 
   const location = useLocation();
   const { perfume } = location.state;
@@ -19,17 +19,21 @@ const AddToCart = () => {
   const dispatch = useDispatch();
   const { products } = useSelector((store) => store.productsReducer);
   const [perfumes, setPerfumes] = useState([]);
+  const { cart } = useSelector((store) => store.cartReducer);
 
   useEffect(() => {
     dispatch(getProducts());
   }, [dispatch]);
+
+  const handleAddToCart = () => {
+    dispatch(addToCart(perfume, quantity));
+  };
 
   useEffect(() => {
     if (products.data && products.data.length > 0) {
       const filteredProducts = products.data.filter(
         (product) => product.category === perfume.category
       );
-      console.log({ FILTERED: filteredProducts });
       const randomPerfumes = shuffleArray(filteredProducts).slice(0, 4);
       setPerfumes(randomPerfumes);
     }
@@ -95,7 +99,10 @@ const AddToCart = () => {
                 +
               </span>
             </div>
-            <div className="bg-[#B99545] text-center text-white w-full p-2">
+            <div
+              className="bg-[#B99545] text-center text-white w-full p-2"
+              onClick={handleAddToCart}
+            >
               Add To Cart
             </div>
           </div>

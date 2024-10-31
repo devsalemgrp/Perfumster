@@ -1,4 +1,4 @@
-import React, { useInsertionEffect } from "react";
+import React from "react";
 import Modal from "react-modal";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";

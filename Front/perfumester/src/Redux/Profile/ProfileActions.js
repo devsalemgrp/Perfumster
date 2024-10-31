@@ -26,7 +26,7 @@ export const getUserOrders = () => async (dispatch) => {
         Authorization: `Bearer ${token}`,
       },
     });
-    dispatch(ProfilePageAction.getUserOrdersSuccess(response));
+    dispatch(ProfilePageAction.getUserOrdersSuccess(response.data.orders));
   } catch (err) {
     dispatch(ProfilePageAction.getUserOrdersFailure(err));
   }

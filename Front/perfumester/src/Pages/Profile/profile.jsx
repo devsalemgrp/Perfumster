@@ -1,48 +1,41 @@
 import React, { useEffect, useState } from "react";
 import "./style.css";
-import Perfume1 from "../../Assets/Test_perfumes/perfume1.png";
 import { useDispatch, useSelector } from "react-redux";
 import {
   getProfileData,
+  getUserOrders,
   getUserSubscription,
 } from "../../Redux/Profile/ProfileActions";
 import EditUserInfoModal from "./Modals/editUserInfoModal";
+import { isTokenValid } from "../../utils/verifyToken";
 
 const Profile = () => {
   const [selectedOrders, setSelectedOrders] = useState("running");
 
   const dispatch = useDispatch();
-  const { profileData, userSubscriptions } = useSelector(
+  const { profileData, userSubscriptions, userOrders } = useSelector(
     (store) => store.profileReducer
   );
 
   const [userData, setUserData] = useState({});
   const [subscriptions, setSubscriptions] = useState({});
+  const [orders, setOrders] = useState([]);
   useEffect(() => {
+    if (!localStorage.getItem("token")) {
+      window.location.href = "/auth";
+    }
+
     dispatch(getProfileData());
     dispatch(getUserSubscription());
+    dispatch(getUserOrders());
   }, [dispatch]);
 
-  const orders = [
-    {
-      name: "Test",
-      quantity: 1,
-      image: Perfume1,
-      price: 40,
-    },
-    {
-      name: "Test",
-      quantity: 1,
-      image: Perfume1,
-      price: 40,
-    },
-    {
-      name: "Test",
-      quantity: 1,
-      image: Perfume1,
-      price: 40,
-    },
-  ];
+  useEffect(() => {
+    if (!isTokenValid(localStorage.getItem("token"))) {
+      localStorage.removeItem("token");
+      window.location.href = "/auth";
+    }
+  }, []);
 
   const formatDate = (dateString) => {
     const options = { year: "numeric", month: "long", day: "numeric" };
@@ -53,8 +46,10 @@ const Profile = () => {
     if (profileData) {
       setUserData(profileData);
       setSubscriptions(userSubscriptions);
+      setOrders(userOrders[0]);
     }
-  }, [profileData, userSubscriptions]);
+    console.log("ORDERS", userOrders);
+  }, [profileData, userSubscriptions, userOrders]);
 
   useEffect(() => {
     console.log("Profile Data", profileData);
@@ -200,19 +195,27 @@ const Profile = () => {
               <h1 className="opacity-60">In Progress</h1>
             </div>
 
-            {orders.map((element, index) => (
+            {orders?.products?.map((product, index) => (
               <>
                 <div className="flex flex-row justify-between items-center">
                   <div className="flex flex-row ">
-                    <img src={element.image} alt="" width={80} />
+                    <img
+                      src={
+                        process.env.REACT_APP_BASE_URL + product.product_image
+                      }
+                      alt=""
+                      width={80}
+                    />
                     <div className="flex flex-col gap-2 items-center justify-center">
-                      <span>{element.name}</span>
-                      <span>Qty: {element.quantity}</span>
+                      <span>{product.product_name}</span>
+                      <span>Qty: {product.quantity_ordered}</span>
                     </div>
                   </div>
 
                   <div>
-                    <span>${element.price}</span>
+                    <span>
+                      ${product.product_price * product.product_quantity}
+                    </span>
                   </div>
                 </div>
                 <hr />

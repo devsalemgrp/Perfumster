@@ -1,19 +1,17 @@
-import { userInfo } from "../../Shared/profileData";
 import { CartPageActions } from "./CartReducers";
 
 export const getCartData = () => (dispatch) => {
   try {
     dispatch(CartPageActions.getCartDataRequest());
-    const response = userInfo;
-    console.log({ Response: response });
-    dispatch(CartPageActions.getCartDataSuccess(response));
+    dispatch(CartPageActions.getCartDataSuccess());
   } catch (err) {
     dispatch(CartPageActions.getCartDataFailure(err.message));
   }
 };
 
-export const addToCart = (item) => (dispatch) => {
+export const addToCart = (perfume, quantity) => (dispatch) => {
   try {
+    const item = { perfume, quantity };
     dispatch(CartPageActions.addToCartRequest());
     dispatch(CartPageActions.addToCartSuccess(item));
   } catch (err) {
@@ -21,12 +19,23 @@ export const addToCart = (item) => (dispatch) => {
   }
 };
 
-export const updateCart = (item) => (dispatch) => {
+export const increaseQuantity = (item) => (dispatch) => {
   try {
-    dispatch(CartPageActions.updateCartRequest());
-    dispatch(CartPageActions.updateCartSuccess(item));
+    console.log("ITEM", item);
+    dispatch(CartPageActions.increaseQuantityRequest());
+    dispatch(CartPageActions.increaseQuantitySuccess(item));
   } catch (err) {
-    dispatch(CartPageActions.updateCartFailure(err.message));
+    dispatch(CartPageActions.increaseQuantityFailure(err.message));
+  }
+};
+
+export const decreaseQuantity = (item) => (dispatch) => {
+  try {
+    console.log("ITEM", item);
+    dispatch(CartPageActions.decreaseQuantityRequest());
+    dispatch(CartPageActions.decreaseQuantitySuccess(item));
+  } catch (err) {
+    dispatch(CartPageActions.decreaseQuantityFailure(err.message));
   }
 };
 

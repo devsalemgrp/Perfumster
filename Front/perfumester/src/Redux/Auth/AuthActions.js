@@ -1,3 +1,4 @@
+import { getProfileData } from "../Profile/ProfileActions";
 import { AuthPageAction } from "./AuthReducer";
 import axios from "axios";
 const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
@@ -14,6 +15,7 @@ export const loginUser = (user) => async (dispatch) => {
     localStorage.setItem("token", token);
     localStorage.setItem("email", email);
     dispatch(AuthPageAction.getLoginSuccess(response.data));
+    dispatch(getProfileData());
   } catch (e) {
     dispatch(AuthPageAction.getLoginFailure(e.message));
   }

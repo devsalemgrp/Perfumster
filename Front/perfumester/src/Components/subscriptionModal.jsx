@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Modal from "react-modal";
 import ChoosePerfumeModal from "./Modals/ChoosePerfumeModal";
-import { perfumes } from "../Shared/products";
 import StripeModal from "./Modals/StripeModal";
 
 const SubscriptionModal = ({ isOpenModal, closeModal, subscription }) => {

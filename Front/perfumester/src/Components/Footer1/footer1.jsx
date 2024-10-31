@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useSearchParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { getHomePageData } from "../../Redux/Home/HomeActions";
 
 const Footer1 = ({ scrollIntoView }) => {
