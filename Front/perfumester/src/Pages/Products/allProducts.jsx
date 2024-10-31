@@ -10,9 +10,7 @@ const AllProducts = () => {
   const [perfumes, setPerfumes] = useState([]);
 
   const dispatch = useDispatch();
-  const { loading, error, products } = useSelector(
-    (store) => store.productsReducer
-  );
+  const { loading, products } = useSelector((store) => store.productsReducer);
 
   const [searchFilter, setSearchFilter] = useState("");
   const [sizeSelected, setSizeSelected] = useState("5ml");
@@ -72,7 +70,7 @@ const AllProducts = () => {
                 onChange={(e) => setSelectedPrice(e.target.value)}
               />
             </div>
-
+            4
             <div className="w-3/4 flex flex-col gap-2 text-md">
               <h1 className="richmond_display text-2xl">Size :</h1>
               <div className="flex flex-row gap-2">
@@ -99,7 +97,6 @@ const AllProducts = () => {
                 </div>
               </div>
             </div>
-
             <div className="flex flex-col gap-1 py-5">
               <h1 className="richmond_display text-2xl">Choose type :</h1>
               <form action="" className="flex flex-col gap-2 items-start">
@@ -123,7 +120,6 @@ const AllProducts = () => {
                 </label>
               </form>
             </div>
-
             <div
               className="bg-white text-black p-2 px-5 text-center"
               onClick={() => setFilterSelected(false)}

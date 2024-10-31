@@ -1,11 +1,12 @@
-import { perfumes, specialPerfumes } from "../../Shared/products";
+import { specialPerfumes } from "../../Shared/products";
 import { ForHimPageAction } from "./ForHimReducers";
 import axios from "axios";
+const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
 
 export const getMenData = () => async (dispatch) => {
   try {
     dispatch(ForHimPageAction.getMenDataRequest());
-    const response = await axios.get("http://localhost:3001/api/men");
+    const response = await axios.get(`${API_BASE_URL}/men`);
     dispatch(ForHimPageAction.getMenDataSuccess(response.data));
   } catch (e) {
     dispatch(ForHimPageAction.getMenDataFailure(e.message));

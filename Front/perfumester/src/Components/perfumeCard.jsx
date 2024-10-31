@@ -12,7 +12,7 @@ const PerfumeCard = ({ perfume }) => {
         <div>
           {/* Image */}
           <div className="w-full flex justify-center h-56 p-4">
-            <img src={localHost + perfume?.image} alt="" width={130} />
+            <img src={localHost + perfume?.image} alt="" className="max-w-40" />
           </div>
         </div>
       </div>

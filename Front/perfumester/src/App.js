@@ -20,6 +20,8 @@ import CreateAccount from "./Components/createAccount";
 import Modal from "react-modal";
 import ContactUs from "./Pages/ContactUs/contactUs";
 import ScrollToTop from "./Components/scrollToTop";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 function App() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const openModal = () => {
@@ -60,6 +62,17 @@ function App() {
         <Route path="/*" element={<PageNotFound />} />
       </Routes>
       <Footer2 />
+      <ToastContainer
+        position="top-right" // You can change the position
+        autoClose={5000} // Auto close after 5 seconds
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
     </div>
   );
 }

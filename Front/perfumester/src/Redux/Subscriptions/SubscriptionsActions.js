@@ -1,10 +1,11 @@
 import { SubscriptionsPageAction } from "./SubscriptionsReducers";
 import axios from "axios";
+const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
 
 export const getSubscriptions = () => async (dispatch) => {
   try {
     dispatch(SubscriptionsPageAction.getSubscriptionsDataRequest());
-    const response = await axios.get("http://localhost:3001/api/packages");
+    const response = await axios.get(`${API_BASE_URL}/packages`);
     dispatch(
       SubscriptionsPageAction.getSubscriptionsDataSuccess(response.data)
     );

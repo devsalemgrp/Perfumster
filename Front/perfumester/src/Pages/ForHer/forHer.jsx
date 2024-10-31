@@ -1,19 +1,5 @@
 import React, { useEffect, useState } from "react";
-import Heading from "../../Assets/Women/Heading.png";
 import Recommended from "../../Assets/Women/recomended.png";
-
-import Special1 from "../../Assets/Women/special1.png";
-import Special2 from "../../Assets/Women/special2.png";
-import Special3 from "../../Assets/Women/special3.png";
-
-import Perfume1 from "../../Assets/Test_perfumes/perfume1.png";
-import Perfume2 from "../../Assets/Test_perfumes/perfume2.png";
-import Perfume3 from "../../Assets/Test_perfumes/perfume3.png";
-import Perfume4 from "../../Assets/Test_perfumes/perfume4.png";
-import Perfume5 from "../../Assets/Test_perfumes/perfume5.png";
-import Perfume6 from "../../Assets/Test_perfumes/perfume6.png";
-import Perfume7 from "../../Assets/Test_perfumes/perfume7.png";
-import Perfume8 from "../../Assets/Test_perfumes/perfume8.png";
 
 import PerfumeCard from "../../Components/perfumeCard";
 import SpecialCard from "../../Components/specialsCard";
@@ -26,31 +12,7 @@ import { getWomenData } from "../../Redux/ForHer/ForHerActions";
 
 const localHost = "http://localhost:3001/";
 const ForHer = () => {
-  ///i will be fetching the men products
   const [chosen, setChosen] = useState("60ml");
-  const specials = [
-    {
-      perfumeImage: Special1,
-      backgroundImage: Special1,
-      title: "Special 1",
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In id nec, sit amet, aliquet scelerisque nullam sagittis, pulvinar. Fermentum scelerisque sit consectetur hac mi. Mollis leo eleifend ultricies purus iaculis.",
-    },
-    {
-      perfumeImage: Special2,
-      backgroundImage: Special2,
-      title: "Special 2",
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In id nec, sit amet, aliquet scelerisque nullam sagittis, pulvinar. Fermentum scelerisque sit consectetur hac mi. Mollis leo eleifend ultricies purus iaculis.",
-    },
-    {
-      perfumeImage: Special3,
-      backgroundImage: Special3,
-      title: "Special 3",
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In id nec, sit amet, aliquet scelerisque nullam sagittis, pulvinar. Fermentum scelerisque sit consectetur hac mi. Mollis leo eleifend ultricies purus iaculis.",
-    },
-  ];
 
   const [perfumes, setPerfumes] = useState([]);
   const [homeSection, setHomeSection] = useState([]);
@@ -76,7 +38,6 @@ const ForHer = () => {
       );
     }
     if (womenData.data) {
-      console.log("Retrieving data");
       setHomeSection(womenData.data.filter((data) => data.section === "home"));
       setRecommendedSection(
         womenData.data.filter((data) => data.section === "recommended")
@@ -89,10 +50,6 @@ const ForHer = () => {
       );
     }
   }, [products, womenData]);
-
-  useEffect(() => {
-    console.log({ HOME: homeSection });
-  }, [homeSection]);
 
   return (
     <>
@@ -144,11 +101,19 @@ const ForHer = () => {
             <img src={Recommended} alt="" className="w-full h-full" />
 
             <div class="perfume-position_women absolute">
-              <img src={Perfume1} alt="Perfume" class="perfume_women" />
+              <img
+                src={localHost + recommendedSection[0]?.content}
+                alt="Perfume"
+                class="perfume_women"
+              />
             </div>
 
             <div class="perfume-position_women_2 absolute">
-              <img src={Perfume1} alt="Perfume" class="perfume_women_2" />
+              <img
+                src={localHost + recommendedSection[0]?.content}
+                alt="Perfume"
+                class="perfume_women_2"
+              />
             </div>
           </div>
         </div>
@@ -156,15 +121,17 @@ const ForHer = () => {
         {/* Specials */}
         <div className="py-9">
           <div className="w-full text-center mt-10">
-            <h1 className="specials text-xl md:text-3xl">Specials</h1>
+            <h1 className="richmond_display text-white text-xl md:text-5xl">
+              Specials
+            </h1>
           </div>
 
           <div className="w-4/5 m-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2">
-            {specials.map((element, index) => (
+            {specialPerfumesSection.map((element, index) => (
               <div key={index} className="w-full">
                 <SpecialCard
-                  perfumeImage={element.perfumeImage}
-                  backgroundImage={element.backgroundImage}
+                  perfume={element}
+                  backgroundImage={specialBackgroundsSection[index]?.content}
                 />
               </div>
             ))}

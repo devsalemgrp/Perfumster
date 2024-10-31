@@ -1,18 +1,5 @@
 import React, { useEffect, useState } from "react";
-import Heading from "../../Assets/Men/heading.png";
 import Recommended from "../../Assets/Men/recommended.png";
-import Special1 from "../../Assets/Men/special1.png";
-import Special2 from "../../Assets/Men/special2.png";
-import Special3 from "../../Assets/Men/special3.png";
-
-import Perfume1 from "../../Assets/Test_perfumes/perfume1.png";
-import Perfume2 from "../../Assets/Test_perfumes/perfume2.png";
-import Perfume3 from "../../Assets/Test_perfumes/perfume3.png";
-import Perfume4 from "../../Assets/Test_perfumes/perfume4.png";
-import Perfume5 from "../../Assets/Test_perfumes/perfume5.png";
-import Perfume6 from "../../Assets/Test_perfumes/perfume6.png";
-import Perfume7 from "../../Assets/Test_perfumes/perfume7.png";
-import Perfume8 from "../../Assets/Test_perfumes/perfume8.png";
 
 import PerfumeCard from "../../Components/perfumeCard";
 
@@ -22,19 +9,15 @@ import Footer_1 from "../../Components/Footer1/footer1";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getProducts } from "../../Redux/Products/ProductsActions";
-import {
-  getMenData,
-  getMenProducts,
-  getRecommendedPerfumes,
-} from "../../Redux/ForHim/ForHimActions";
+import { getMenData } from "../../Redux/ForHim/ForHimActions";
 
 const ForHim = () => {
   const [chosen, setChosen] = useState("60ml");
-
   const [perfumes, setPerfumes] = useState([]);
   const localHost = "http://localhost:3001/";
   const dispatch = useDispatch();
   const { menData } = useSelector((store) => store.forHimReducer);
+  const { products } = useSelector((store) => store.productsReducer);
 
   const [homeSection, setHomeSection] = useState([]);
   const [recommendedPerfumes, setRecommendedPerfumes] = useState([]);
@@ -43,11 +26,11 @@ const ForHim = () => {
 
   useEffect(() => {
     dispatch(getMenData());
+    dispatch(getProducts());
   }, [dispatch]);
 
   useEffect(() => {
     if (menData.data) {
-      console.log({ MENPAGEDATA: menData });
       setHomeSection(
         menData.data.filter((section) => section.section === "home")
       );
@@ -63,32 +46,13 @@ const ForHim = () => {
         menData.data.filter((section) => section.section === "special_perfumes")
       );
     }
-    console.log({ MenData: menData });
-  }, [menData]);
 
-  const specials = [
-    {
-      perfumeImage: Special1,
-      backgroundImage: Special1,
-      title: "Special 1",
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In id nec, sit amet, aliquet scelerisque nullam sagittis, pulvinar. Fermentum scelerisque sit consectetur hac mi. Mollis leo eleifend ultricies purus iaculis.",
-    },
-    {
-      perfumeImage: Special2,
-      backgroundImage: Special2,
-      title: "Special 2",
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In id nec, sit amet, aliquet scelerisque nullam sagittis, pulvinar. Fermentum scelerisque sit consectetur hac mi. Mollis leo eleifend ultricies purus iaculis.",
-    },
-    {
-      perfumeImage: Special3,
-      backgroundImage: Special3,
-      title: "Special 3",
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In id nec, sit amet, aliquet scelerisque nullam sagittis, pulvinar. Fermentum scelerisque sit consectetur hac mi. Mollis leo eleifend ultricies purus iaculis.",
-    },
-  ];
+    if (products.data) {
+      setPerfumes(
+        products.data.filter((product) => product.category === "Male")
+      );
+    }
+  }, [menData, products]);
 
   return (
     <>
@@ -121,7 +85,7 @@ const ForHim = () => {
 
           <div className="w-full ">
             <img
-              src={localHost + homeSection[0].content}
+              src={localHost + homeSection[0]?.content}
               className="w-full h-screen object-cover object-right"
               alt=""
             />
@@ -140,11 +104,19 @@ const ForHim = () => {
             <img src={Recommended} alt="" className="w-full h-full" />
 
             <div class="perfume-position absolute">
-              <img src={Perfume1} alt="Perfume" class="perfume" />
+              <img
+                src={localHost + recommendedPerfumes[0]?.content}
+                alt="Perfume"
+                class="perfume"
+              />
             </div>
 
             <div class="perfume-position_2 absolute">
-              <img src={Perfume1} alt="Perfume" class="perfume_2" />
+              <img
+                src={localHost + recommendedPerfumes[0]?.content}
+                alt="Perfume"
+                class="perfume_2"
+              />
             </div>
           </div>
         </div>
@@ -156,11 +128,11 @@ const ForHim = () => {
           </div>
 
           <div className="w-4/5 m-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2">
-            {recommendedPerfumes.map((element, index) => (
+            {specialPerfumes.map((element, index) => (
               <div key={index} className="w-full">
                 <SpecialCard
-                  perfumeImage={element.image}
-                  backgroundImage={Special1}
+                  perfumeImage={element?.content}
+                  backgroundImage={specialBackgrounds[index]?.content}
                 />
               </div>
             ))}

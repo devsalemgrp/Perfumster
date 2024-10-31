@@ -150,7 +150,7 @@ const Navbar = () => {
               </div>
             </Link>
 
-            {profileData.length === 0 && (
+            {!localStorage.getItem("token") && (
               <Link to={"/auth"}>
                 <div className="hidden md:flex rounded-full  bg-white text-black p-3 cursor-pointer">
                   <span className=" sm:block auth_button_content">
@@ -160,7 +160,7 @@ const Navbar = () => {
               </Link>
             )}
 
-            {profileData.length > 0 && (
+            {localStorage.getItem("token") && (
               <Link to={"/profile"}>
                 <div className="hidden md:flex rounded-full  bg-white text-black p-3 cursor-pointer">
                   <span className=" sm:block auth_button_content">Profile</span>

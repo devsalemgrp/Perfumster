@@ -1,10 +1,11 @@
 import axios from "axios";
 import { ForHerPageAction } from "./ForHerReducers";
+const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
 
 export const getWomenData = () => async (dispatch) => {
   try {
     dispatch(ForHerPageAction.getWomenDataRequest());
-    const response = await axios.get("http://localhost:3001/api/women");
+    const response = await axios.get(`${API_BASE_URL}/women`);
     dispatch(ForHerPageAction.getWomenDataSuccess(response.data));
   } catch (e) {
     dispatch(ForHerPageAction.getWomenDataFailure(e.message));

@@ -1,26 +1,21 @@
 import React, { useEffect, useState, useRef } from "react";
 import "./style.css";
 import { Link } from "react-router-dom";
-
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
 import { Pagination } from "swiper/modules";
-
-import Background1 from "../../Assets/Home/image.png";
-import Background2 from "../../Assets/Home/image3.png";
-
-import SwipeImages from "../../Assets/Home/image1.png";
-
 import Footer1 from "../../Components/Footer1/footer1";
 import SubscriptionModal from "../../Components/subscriptionModal";
 import PackageCard from "../../Components/packageCard";
 import { useDispatch, useSelector } from "react-redux";
 import { getHomePageData } from "../../Redux/Home/HomeActions";
+import ChoosePerfumeModal from "../../Components/Modals/ChoosePerfumeModal";
+
 const localhost = "http://localhost:3001/";
 const Home = () => {
-  const [backgroundImages, setBackgroundImage] = useState([]);
   const [isOpenModal, setIsOpenModal] = useState(false);
+
   const dispatch = useDispatch();
   const { homePageData } = useSelector((store) => store.homeReducer);
   const [welcomeSection, setWelcomeSection] = useState([]);
@@ -47,10 +42,6 @@ const Home = () => {
       );
       setCtaSection(homePageData.data.filter((data) => data.section === "cta"));
     }
-  }, [homePageData]);
-
-  useEffect(() => {
-    console.log(homePageData);
   }, [homePageData]);
 
   const openModal = () => {

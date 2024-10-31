@@ -2,16 +2,25 @@ import React, { useEffect, useState } from "react";
 import "./style.css";
 import Perfume1 from "../../Assets/Test_perfumes/perfume1.png";
 import { useDispatch, useSelector } from "react-redux";
-import { getProfileData } from "../../Redux/Profile/ProfileActions";
+import {
+  getProfileData,
+  getUserSubscription,
+} from "../../Redux/Profile/ProfileActions";
+import EditUserInfoModal from "./Modals/editUserInfoModal";
 
 const Profile = () => {
   const [selectedOrders, setSelectedOrders] = useState("running");
 
   const dispatch = useDispatch();
-  const { profileData } = useSelector((store) => store.profileReducer);
+  const { profileData, userSubscriptions } = useSelector(
+    (store) => store.profileReducer
+  );
 
+  const [userData, setUserData] = useState({});
+  const [subscriptions, setSubscriptions] = useState({});
   useEffect(() => {
     dispatch(getProfileData());
+    dispatch(getUserSubscription());
   }, [dispatch]);
 
   const orders = [
@@ -35,20 +44,57 @@ const Profile = () => {
     },
   ];
 
+  const formatDate = (dateString) => {
+    const options = { year: "numeric", month: "long", day: "numeric" };
+    return new Date(dateString).toLocaleDateString(undefined, options);
+  };
+
+  useEffect(() => {
+    if (profileData) {
+      setUserData(profileData);
+      setSubscriptions(userSubscriptions);
+    }
+  }, [profileData, userSubscriptions]);
+
+  useEffect(() => {
+    console.log("Profile Data", profileData);
+  }, [profileData]);
+
+  const [isOpenEditModal, setIsOpenEditModal] = useState(false);
+
+  const openModal = () => {
+    console.log("HELLO");
+    setIsOpenEditModal(true);
+  };
+
+  const closeModal = () => {
+    setIsOpenEditModal(false);
+  };
+
   return (
     <div className="w-full bg-[#313131]">
+      <EditUserInfoModal
+        isOpen={isOpenEditModal}
+        closeModal={closeModal}
+        profileData={userData}
+      ></EditUserInfoModal>
       <div className="w-4/5 mx-auto py-5">
-        <div className="bg-[#1D1D1D] rounded-md flex flex-col lg:flex-row gap-3 p-5 helvetica">
+        <div
+          className="bg-[#1D1D1D] rounded-md flex flex-col lg:flex-row gap-3 p-5 helvetica"
+          onClick={() => {
+            openModal();
+          }}
+        >
           <div className="lg:w-1/3 flex flex-col justify-center items-center">
             <div className=" rounded-full">
               <img
-                src={profileData[0].profileImage}
+                src={profileData[0]?.profileImage}
                 alt=""
                 width={200}
                 className="rounded-full"
               />
             </div>
-            <span className="text-white">{profileData[0].userName} </span>
+            <span className="text-white">{userData?.name} </span>
           </div>
 
           <div className="lg:w-2/3 flex flex-col gap-2 text-white">
@@ -56,9 +102,7 @@ const Profile = () => {
               <div className="flex-1 flex flex-col">
                 <h1>Email number</h1>
                 <div className="bg-white rounded-md py-1 text-black ">
-                  <span className="pl-2 opacity-60">
-                    {profileData[0].email}
-                  </span>
+                  <span className="pl-2 opacity-60">{userData?.email}</span>
                 </div>
               </div>
 
@@ -66,7 +110,7 @@ const Profile = () => {
                 <h1>Phone number</h1>
                 <div className="bg-white rounded-md py-1  text-black ">
                   <span className="pl-2 opacity-60">
-                    {profileData[0].phoneNumber}
+                    {userData?.phone_number}
                   </span>
                 </div>
               </div>
@@ -76,7 +120,7 @@ const Profile = () => {
                 <h1>Date of birth</h1>
                 <div className="bg-white rounded-md py-1  text-black ">
                   <span className="pl-2 opacity-60">
-                    {profileData[0].dateOfBirth}
+                    {formatDate(userData?.date_of_birth)}
                   </span>
                 </div>
               </div>
@@ -84,9 +128,7 @@ const Profile = () => {
               <div className="flex-1 flex flex-col">
                 <h1>Country</h1>
                 <div className="bg-white rounded-md py-1  text-black ">
-                  <span className="pl-2 opacity-60">
-                    {profileData[0].country}
-                  </span>
+                  <span className="pl-2 opacity-60">{userData?.country}</span>
                 </div>
               </div>
             </div>
@@ -96,7 +138,7 @@ const Profile = () => {
                 <h1>Profession</h1>
                 <div className="bg-white rounded-md py-1  text-black ">
                   <span className="pl-2 opacity-60">
-                    {profileData[0].profession}
+                    {userData?.profession}
                   </span>
                 </div>
               </div>
@@ -104,9 +146,7 @@ const Profile = () => {
               <div className="flex-1 flex flex-col">
                 <h1>Password</h1>
                 <div className="bg-white rounded-md py-1  text-black ">
-                  <span className="pl-2 opacity-60">
-                    {profileData[0].password}
-                  </span>
+                  <span className="pl-2 opacity-60">*****************</span>
                 </div>
               </div>
             </div>
@@ -118,11 +158,8 @@ const Profile = () => {
           <div className="border rounded-md p-3">
             <div className="bg-[#383838] p-2 rounded-md">
               <h1>
-                {profileData[0].subscriptions.title} |
-                {profileData[0].subscriptions.price}/Month
-              </h1>
-              <h1 className="text-3xl">
-                {profileData[0].subscriptions.subscriptionType}
+                {subscriptions?.package?.name} |{subscriptions?.package?.price}{" "}
+                $ /Month
               </h1>
             </div>
 
