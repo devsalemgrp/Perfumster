@@ -50,7 +50,7 @@ const deleteWelcomeSectionImage = (req, res) => {
   const { id } = req.params;
 
   database.db.query(
-    `SELECT content FROM homepage WHERE id = ?`,
+    `SELECT content FROM ${HOME_PAGE_TABLE} WHERE id = ?`,
     [id],
     (err, rows) => {
       if (err) {

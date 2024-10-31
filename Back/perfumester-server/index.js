@@ -12,6 +12,8 @@ const mensPageRoutes = require("./routes/menPageRoutes");
 const womensPageRoutes = require("./routes/womenPageRoutes");
 const newPageRoutes = require("./routes/newPageRoutes");
 const ordersRoutes = require("./routes/ordersPageRoutes");
+const userRoutes = require("./routes/userRoutes");
+
 const cors = require("cors");
 
 app.use(cors());
@@ -28,6 +30,7 @@ app.use("/api/men", mensPageRoutes);
 app.use("/api/women", womensPageRoutes);
 app.use("/api/new", newPageRoutes);
 app.use("/api/orders", ordersRoutes);
+app.use("/api/users", userRoutes);
 
 app.listen(_PORT, () => {
   console.log("listening on port...");
