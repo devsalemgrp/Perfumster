@@ -1,15 +1,13 @@
 import axios from 'axios';
 import { PackageAction } from './PackagesReducer';
-import { perfumePackages } from '../../Shared/PackagesPageData';
 import { toast } from 'react-toastify';
+const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
 
 export const getPackagesData = () => async (dispatch) => {
   try {
     dispatch(PackageAction.getPackagesRequest());
 
-    const _response = await axios.get('http://localhost:3001/api/packages');
-    console.log(_response);
-    const response = perfumePackages;
+    const _response = await axios.get(`${API_BASE_URL}/packages`);
     dispatch(PackageAction.getPackagesSuccess(_response.data));
   } catch (error) {
     dispatch(PackageAction.getPackagesFailure());
@@ -22,10 +20,9 @@ export const editPackageData = (updatedPackage) => async (dispatch) => {
       toast.error('Please enter all the fields');
       return;
     }
-    console.log('EDITING PACKAGE');
     dispatch(PackageAction.editPackagesRequest());
     const response = await axios.patch(
-      'http://localhost:3001/api/packages/update/' + updatedPackage.id,
+      `${API_BASE_URL}/packages/update/` + updatedPackage.id,
       updatedPackage
     );
 
@@ -38,12 +35,12 @@ export const editPackageData = (updatedPackage) => async (dispatch) => {
   }
 };
 
-export const editPackageActivity = (packageId, updatedData) => (dispatch) => {
-  try {
-    dispatch(PackageAction.editPackagesActivityRequest());
-    const response = axios.patch('url', { packageId, updatedData });
-    dispatch(PackageAction.editPackagesActivitySuccess(response));
-  } catch (error) {
-    dispatch(PackageAction.editPackagesActivityFailure());
-  }
-};
+// export const editPackageActivity = (packageId, updatedData) => (dispatch) => {
+//   try {
+//     dispatch(PackageAction.editPackagesActivityRequest());
+//     const response = axios.patch('url', { packageId, updatedData });
+//     dispatch(PackageAction.editPackagesActivitySuccess(response));
+//   } catch (error) {
+//     dispatch(PackageAction.editPackagesActivityFailure());
+//   }
+// };

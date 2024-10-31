@@ -1,13 +1,13 @@
 import axios from 'axios';
 import { MensPageAction } from './MensPageReducer';
-import { mensPageData } from '../../Shared/MensPageData';
 import { toast } from 'react-toastify';
+const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
 
 export const getMensPageData = () => async (dispatch) => {
   try {
     dispatch(MensPageAction.getMenPageDataRequest());
 
-    const response = await axios.get('http://localhost:3001/api/men');
+    const response = await axios.get(`${API_BASE_URL}/men`);
     dispatch(MensPageAction.getMenPageDataSuccess(response.data));
   } catch (error) {
     dispatch(MensPageAction.getMenPageDataFailure());
@@ -26,7 +26,7 @@ export const aAIHomeSection = (image) => async (dispatch) => {
     const formData = new FormData();
     formData.append('image', image);
     const response = await axios.post(
-      'http://localhost:3001/api/men/home-section/create',
+      `${API_BASE_URL}/men/home-section/create`,
       formData
     );
     dispatch(MensPageAction.aAIHomeSectionSuccess(response));
@@ -42,7 +42,7 @@ export const dIHomeSection = (imageId) => async (dispatch) => {
   try {
     dispatch(MensPageAction.dIHomeSectionRequest());
     const response = await axios.delete(
-      'http://localhost:3001/api/men/home-section/delete/' + imageId
+      `${API_BASE_URL}/men/home-section/delete/` + imageId
     );
     dispatch(MensPageAction.dIHomeSectionSuccess(response));
     dispatch(getMensPageData());
@@ -59,7 +59,7 @@ export const rIRecommendedSection = (imageId, newImage) => async (dispatch) => {
     const formData = new FormData();
     formData.append('image', newImage);
     const response = await axios.patch(
-      'http://localhost:3001/api/men/recommended-section/update/' + imageId,
+      `${API_BASE_URL}/men/recommended-section/update` + imageId,
       formData
     );
     dispatch(MensPageAction.rIRecommendedSectionSuccess(response));
@@ -75,7 +75,7 @@ export const dIRecommendedSection = (imageId) => async (dispatch) => {
   try {
     dispatch(MensPageAction.dIRecommendedSectionRequest());
     const response = await axios.delete(
-      'http://localhost:3001/api/men/recommended-section/delete/' + imageId
+      `${API_BASE_URL}/men/recommended-section/delete/` + imageId
     );
     dispatch(MensPageAction.dIRecommendedSectionSuccess(response));
     dispatch(getMensPageData());
@@ -92,8 +92,7 @@ export const rISpecialSection = (imageId, newImage) => async (dispatch) => {
     const formData = new FormData();
     formData.append('image', newImage);
     const response = await axios.patch(
-      'http://localhost:3001/api/men/special-perfumes-section/update/' +
-        imageId,
+      `${API_BASE_URL}/men/special-perfumes-section/update/` + imageId,
       formData
     );
     dispatch(MensPageAction.rISpecialSectionSuccess(response));
@@ -109,7 +108,7 @@ export const dISpecialSection = (imageId) => async (dispatch) => {
   try {
     dispatch(MensPageAction.dISpecialSectionRequest());
     const response = await axios.delete(
-      'http://localhost:3001/api/men/special-perfumes-section/delete/' + imageId
+      `${API_BASE_URL}/men/special-perfumes-section/delete/` + imageId
     );
     dispatch(MensPageAction.dISpecialSectionSuccess(response));
     dispatch(getMensPageData());
@@ -124,8 +123,7 @@ export const dISpecialBackgroundSection = (imageId) => async (dispatch) => {
   try {
     dispatch(MensPageAction.dISpecialBackgroundSectionRequest());
     const response = await axios.delete(
-      'http://localhost:3001/api/men/special-backgrounds-section/delete/' +
-        imageId
+      `${API_BASE_URL}/men/special-backgrounds-section/delete/` + imageId
     );
     dispatch(MensPageAction.dISpecialBackgroundSectionSuccess(response));
     dispatch(getMensPageData());

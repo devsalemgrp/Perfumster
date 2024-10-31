@@ -1,11 +1,12 @@
 import axios from 'axios';
 import { HomePageAction } from './HomePageReducer';
 import { toast } from 'react-toastify';
+const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
 
 export const getHomePageData = () => async (dispatch) => {
   try {
     dispatch(HomePageAction.getHomePageDataRequest());
-    const response = await axios.get('http://localhost:3001/api/home');
+    const response = await axios.get(`${API_BASE_URL}/home`);
     dispatch(HomePageAction.getHomePageDataSuccess(response.data));
   } catch (error) {
     dispatch(HomePageAction.getHomePageDataFailure());
@@ -23,7 +24,7 @@ export const aAIHomeSection = (image) => async (dispatch) => {
     formData.append('image', image);
     formData.append('section', 'welcome');
     const response = await axios.post(
-      'http://localhost:3001/api/home/welcome-section/create',
+      `${API_BASE_URL}/home/welcome-section/create`,
       formData
     );
     dispatch(getHomePageData());
@@ -40,7 +41,7 @@ export const dIHomeSection = (imageId) => async (dispatch) => {
     dispatch(HomePageAction.dIHomeSectionRequest());
 
     const response = await axios.delete(
-      'http://localhost:3001/api/home/welcome-section/delete/' + imageId
+      `${API_BASE_URL}/home/welcome-section/delete/` + imageId
     );
     dispatch(getHomePageData());
     dispatch(HomePageAction.dIHomeSectionSuccess(response));
@@ -59,7 +60,7 @@ export const editHeroSection = (updatedData) => async (dispatch) => {
     }
     dispatch(HomePageAction.editHeroSectionRequest());
     const response = await axios.patch(
-      'http://localhost:3001/api/home/hero-section/update',
+      `${API_BASE_URL}/home/hero-section/update`,
       updatedData
     );
 
@@ -84,7 +85,7 @@ export const replaceSection2Image =
       const formData = new FormData();
       formData.append('image', newImage);
       const response = await axios.patch(
-        'http://localhost:3001/api/home/section2-section/update/' + prevImageId,
+        `${API_BASE_URL}/home/section2-section/update/` + prevImageId,
         formData
       );
 
@@ -102,7 +103,7 @@ export const deleteSection2Image = (imageId) => async (dispatch) => {
     dispatch(HomePageAction.deleteSection2ImageRequest());
 
     const response = await axios.delete(
-      'http://localhost:3001/api/home/section2-section/delete/' + imageId
+      `${API_BASE_URL}/home/section2-section/delete/` + imageId
     );
     dispatch(HomePageAction.deleteSection2ImageSuccess(response));
     dispatch(getHomePageData());
@@ -115,9 +116,8 @@ export const deleteSection2Image = (imageId) => async (dispatch) => {
 export const editCtaSectionData = (updatedData) => async (dispatch) => {
   try {
     dispatch(HomePageAction.editCtaSectionRequest());
-    /**Implementation */
     const response = await axios.patch(
-      'http://localhost:3001/api/home/cta-section/update',
+      `${API_BASE_URL}/home/cta-section/update`,
       updatedData
     );
     dispatch(getHomePageData());

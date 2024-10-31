@@ -37,7 +37,7 @@ const CallToActionModal = ({ isOpenModal, closeModal, data }) => {
         </h1>
 
         <form onSubmit={handleSubmit} className="space-y-4">
-          {updatedData.map((element, index) => (
+          {updatedData?.map((element, index) => (
             <div key={element} className="flex flex-col gap-2">
               <label className="text-lg">
                 {element.subsection.charAt(0).toUpperCase() +

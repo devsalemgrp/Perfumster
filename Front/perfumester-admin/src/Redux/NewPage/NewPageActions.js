@@ -1,11 +1,12 @@
 import axios from 'axios';
 import { NewPageAction } from './NewPageReducer';
 import { toast } from 'react-toastify';
+const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
 
 export const getNewPageData = () => async (dispatch) => {
   try {
     dispatch(NewPageAction.getNewPageDataRequest());
-    const response = await axios.get('http://localhost:3001/api/new');
+    const response = await axios.get(`${API_BASE_URL}/new`);
     dispatch(NewPageAction.getNewPageDataSuccess(response.data));
   } catch (error) {
     dispatch(NewPageAction.getNewPageDataFailure());
@@ -24,7 +25,7 @@ export const aAIHomeSection = (image) => async (dispatch) => {
     const formData = new FormData();
     formData.append('image', image);
     const response = await axios.post(
-      'http://localhost:3001/api/new/welcome-section/create',
+      `${API_BASE_URL}/new/welcome-section/create`,
       formData
     );
     dispatch(NewPageAction.aAIHomeSectionSuccess(response));
@@ -40,7 +41,7 @@ export const dIHomeSection = (imageId) => async (dispatch) => {
   try {
     dispatch(NewPageAction.dIHomeSectionRequest());
     const response = await axios.delete(
-      'http://localhost:3001/api/new/welcome-section/delete/' + imageId
+      `${API_BASE_URL}/new/welcome-section/delete/` + imageId
     );
     dispatch(NewPageAction.dIHomeSectionSuccess(response));
     dispatch(getNewPageData());

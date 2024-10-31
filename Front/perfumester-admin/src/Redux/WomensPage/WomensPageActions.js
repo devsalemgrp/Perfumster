@@ -1,14 +1,12 @@
 import axios from 'axios';
 import { WomenPageAction } from './WomensPageReducer';
-import { womenPageData } from '../../Shared/WomenPageData';
 import { toast } from 'react-toastify';
+const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
 
 export const getWomenPageData = () => async (dispatch) => {
   try {
     dispatch(WomenPageAction.getWomenPageDataRequest());
-    const _response = await axios.get('http://localhost:3001/api/women');
-    console.log(_response);
-    const response = womenPageData;
+    const _response = await axios.get(`${API_BASE_URL}/women`);
     dispatch(WomenPageAction.getWomenPageDataSuccess(_response.data));
   } catch (error) {
     dispatch(WomenPageAction.getWomenPageDataFailure());
@@ -22,7 +20,7 @@ export const aAIHomeSection = (image) => async (dispatch) => {
     const formaData = new FormData();
     formaData.append('image', image);
     const response = await axios.post(
-      'http://localhost:3001/api/women/home-section/create',
+      `${API_BASE_URL}/women/home-section/create`,
       formaData
     );
     dispatch(WomenPageAction.aAIHomeSectionSuccess(response));
@@ -38,7 +36,7 @@ export const dIHomeSection = (imageId) => async (dispatch) => {
   try {
     dispatch(WomenPageAction.dIHomeSectionRequest());
     const response = await axios.delete(
-      'http://localhost:3001/api/women/home-section/delete/' + imageId
+      `${API_BASE_URL}/women/home-section/delete/` + imageId
     );
     dispatch(WomenPageAction.dIHomeSectionSuccess(response));
     dispatch(getWomenPageData());
@@ -55,7 +53,7 @@ export const rIRecommendedSection = (imageId, newImage) => async (dispatch) => {
     const formData = new FormData();
     formData.append('image', newImage);
     const response = await axios.patch(
-      'http://localhost:3001/api/women/recommended-section/update/' + imageId,
+      `${API_BASE_URL}/women/recommended-section/update/` + imageId,
       formData
     );
     dispatch(WomenPageAction.rIRecommendedSectionSuccess(response));
@@ -71,7 +69,7 @@ export const dIRecommendedSection = (imageId) => async (dispatch) => {
   try {
     dispatch(WomenPageAction.dIRecommendedSectionRequest());
     const response = await axios.delete(
-      'http://localhost:3001/api/women/recommended-section/delete/' + imageId
+      `${API_BASE_URL}/women/recommended-section/delete/` + imageId
     );
     dispatch(WomenPageAction.dIRecommendedSectionSuccess(response));
     dispatch(getWomenPageData());
@@ -88,8 +86,7 @@ export const rISpecialSection = (imageId, newImage) => async (dispatch) => {
     const formData = new FormData();
     formData.append('image', newImage);
     const response = await axios.patch(
-      'http://localhost:3001/api/women/special-perfumes-section/update/' +
-        imageId,
+      `${API_BASE_URL}/women/special-perfumes-section/update/` + imageId,
       formData
     );
     dispatch(WomenPageAction.rISpecialSectionSuccess(response));
@@ -106,8 +103,7 @@ export const dISpecialSection = (imageId) => async (dispatch) => {
     dispatch(WomenPageAction.dISpecialSectionRequest());
 
     const response = await axios.delete(
-      'http://localhost:3001/api/women/special-perfumes-section/delete/' +
-        imageId
+      `${API_BASE_URL}/women/special-perfumes-section/delete/` + imageId
     );
     dispatch(WomenPageAction.dISpecialSectionSuccess(response));
     dispatch(getWomenPageData());
@@ -122,8 +118,7 @@ export const dISpecialBackgroundSection = (imageId) => async (dispatch) => {
   try {
     dispatch(WomenPageAction.dISpecialBackgroundSectionRequest());
     const response = await axios.delete(
-      'http://localhost:3001/api/women/special-backgrounds-section/delete/' +
-        imageId
+      `${API_BASE_URL}/women/special-backgrounds-section/delete/` + imageId
     );
     dispatch(WomenPageAction.dISpecialBackgroundSectionSuccess(response));
     dispatch(getWomenPageData());

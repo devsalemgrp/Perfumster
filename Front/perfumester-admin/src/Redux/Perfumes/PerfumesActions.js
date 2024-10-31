@@ -1,18 +1,15 @@
 import axios from 'axios';
 import { PerfumesAction } from './PerfumesReducer';
-import { products } from '../../Shared/PerfumesPageData';
 import { toast } from 'react-toastify';
+const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
 
 export const getPerfumesData = () => async (dispatch) => {
   try {
     dispatch(PerfumesAction.getPerfumesRequest());
-    const response = products;
-    const _response = await axios.get('http://localhost:3001/api/products');
+    const _response = await axios.get(`${API_BASE_URL}/products`);
     dispatch(PerfumesAction.getPerfumesSuccess(_response.data.data));
   } catch (error) {
     dispatch(PerfumesAction.getPerfumesFailure());
-    console.log(error);
-    alert(error.message);
   }
 };
 
@@ -40,7 +37,7 @@ export const addProduct = (product) => async (dispatch) => {
     formData.append('subscriptionCategory', product.subscriptionCategory);
     formData.append('category', product.category);
     const response = await axios.post(
-      'http://localhost:3001/api/products/create',
+      `${API_BASE_URL}/products/create`,
       formData
     );
     dispatch(getPerfumesData());
@@ -48,8 +45,6 @@ export const addProduct = (product) => async (dispatch) => {
     toast.success('Product added successfully!');
   } catch (error) {
     dispatch(PerfumesAction.addProductFailure());
-    console.log(error);
-    alert(error.message);
   }
 };
 
@@ -66,15 +61,13 @@ export const updateProduct = (productId, updatedData) => async (dispatch) => {
     formData.append('subscriptionCategory', updatedData.subscriptionCategory);
     formData.append('category', updatedData.category);
     const response = await axios.patch(
-      `http://localhost:3001/api/products/update/${productId}`,
+      `${API_BASE_URL}/products/update/${productId}`,
       formData
     );
     dispatch(getPerfumesData());
     dispatch(PerfumesAction.updateProductSuccess(response.data));
   } catch (error) {
     dispatch(PerfumesAction.updateProductFailure());
-    console.log(error);
-    alert(error.message);
   }
 };
 
@@ -82,7 +75,7 @@ export const deleteProduct = (productId) => async (dispatch) => {
   try {
     dispatch(PerfumesAction.deleteProductRequest());
     const response = await axios.delete(
-      `http://localhost:3001/api/products/delete/${productId}`
+      `${API_BASE_URL}/products/delete/${productId}`
     );
     dispatch(getPerfumesData());
     dispatch(PerfumesAction.deleteProductSuccess(response.data));
