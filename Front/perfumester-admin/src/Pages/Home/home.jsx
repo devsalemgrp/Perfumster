@@ -183,7 +183,7 @@ const Home = () => {
             <div className="border-2 flex flex-col gap-4 p-3">
               <div className="h-48 w-72">
                 <img
-                  src={'http://localhost:3001/' + element.content}
+                  src={'http://localhost:3004/' + element.content}
                   alt="background"
                   className="h-full w-full"
                 />
